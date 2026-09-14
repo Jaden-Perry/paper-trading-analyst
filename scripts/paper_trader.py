@@ -1,0 +1,169 @@
+"""Weekly orchestrator: screen stocks, decide buy/sell/hold for the paper
+portfolio, write analyst-style rationales, and persist both the raw ledger
+(data/trades.json) and the derived dashboard view (docs/portfolio.json).
+
+Usage: python paper_trader.py [--limit N]
+    --limit N   only screen the first N universe symbols (fast local testing)
+Env vars: ANTHROPIC_API_KEY (required only if there's at least one buy/sell/
+hold event to narrate, which is every run once positions exist)
+"""
+from __future__ import annotations
+import argparse
+import json
+import statistics
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+import ledger as ledger_mod
+import market_news
+import portfolio_engine
+import screener
+import stock_data
+import trade_writer
+
+ROOT = Path(__file__).resolve().parent.parent
+CONFIG_PATH = ROOT / "config" / "paper_trading.json"
+UNIVERSE_PATH = ROOT / "config" / "stock_universe.json"
+DASHBOARD_PATH = ROOT / "docs" / "portfolio.json"
+
+
+def load_json(path: Path):
+    with open(path) as f:
+        return json.load(f)
+
+
+def today_str() -> str:
+    return datetime.now(timezone.utc).date().isoformat()
+
+
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def fetch_held_prices(symbols: list[str]) -> dict[str, float]:
+    prices = {}
+    for symbol in symbols:
+        hist = stock_data.fetch_price_history(symbol, range_="5d")
+        if hist is not None:
+            prices[symbol] = hist["closes"][-1]
+        else:
+            print(f"paper_trader: could not fetch current price for held position {symbol}")
+    return prices
+
+
+def max_drawdown_pct(history: list[dict]) -> float:
+    if not history:
+        return 0.0
+    peak = history[0]["total_value"]
+    worst = 0.0
+    for h in history:
+        peak = max(peak, h["total_value"])
+        drawdown = (h["total_value"] - peak) / peak if peak else 0.0
+        worst = min(worst, drawdown)
+    return abs(worst)
+
+
+def build_dashboard(ledger: dict, all_prices: dict[str, float]) -> dict:
+    open_positions = []
+    for pos in ledger["positions"]:
+        price = all_prices.get(pos["symbol"], pos["entry_price"])
+        unrealized_pnl = (price - pos["entry_price"]) * pos["shares"]
+        open_positions.append(
+            {
+                **pos,
+                "current_price": price,
+                "unrealized_pnl": unrealized_pnl,
+                "unrealized_pnl_pct": (price - pos["entry_price"]) / pos["entry_price"],
+            }
+        )
+
+    closed_trades = sorted(ledger["closed_trades"], key=lambda t: t["exit_date"], reverse=True)
+    total_value = ledger["cash"] + sum(p["current_price"] * p["shares"] for p in open_positions)
+
+    wins = [t for t in ledger["closed_trades"] if t["realized_pnl"] > 0]
+    win_rate = len(wins) / len(ledger["closed_trades"]) if ledger["closed_trades"] else None
+
+    return {
+        "generated_at": now_iso(),
+        "summary": {
+            "total_value": total_value,
+            "cash": ledger["cash"],
+            "initial_capital": ledger["initial_capital"],
+            "total_return_pct": (total_value - ledger["initial_capital"]) / ledger["initial_capital"],
+            "num_open_positions": len(open_positions),
+            "num_closed_trades": len(ledger["closed_trades"]),
+            "win_rate": win_rate,
+            "max_drawdown_pct": max_drawdown_pct(ledger["history"]),
+        },
+        "open_positions": open_positions,
+        "closed_trades": closed_trades,
+        "value_history": ledger["history"],
+        "weekly_reports": list(reversed(ledger["weekly_reports"])),
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--limit", type=int, default=None, help="only screen the first N universe symbols")
+    args = parser.parse_args()
+
+    config = load_json(CONFIG_PATH)
+    universe = load_json(UNIVERSE_PATH)
+    if args.limit:
+        universe = universe[: args.limit]
+
+    ledger = ledger_mod.load_ledger(config["initial_capital"])
+    today = today_str()
+
+    print(f"paper_trader: screening {len(universe)} symbols...")
+    candidates = screener.screen(universe, config)
+    print(f"paper_trader: {len(candidates)} symbols passed hard filters")
+
+    held_symbols = [p["symbol"] for p in ledger["positions"]]
+    held_prices = fetch_held_prices(held_symbols)
+
+    ledger, events = portfolio_engine.decide(ledger, candidates, held_prices, config, today)
+    print(f"paper_trader: {len(events)} events this run "
+          f"({sum(1 for e in events if e['action']=='buy')} buy, "
+          f"{sum(1 for e in events if e['action']=='sell')} sell, "
+          f"{sum(1 for e in events if e['action']=='hold')} hold)")
+
+    for event in events:
+        event["headlines"] = market_news.fetch_symbol_headlines(
+            event["symbol"], config["news_feed_url_template"]
+        )
+
+    rationales = trade_writer.generate_rationales(events) if events else {}
+
+    for event in events:
+        event["rationale"] = rationales.get(event["symbol"], "")
+
+    rationale_by_symbol = {e["symbol"]: e["rationale"] for e in events}
+    for pos in ledger["positions"]:
+        if pos["symbol"] in rationale_by_symbol and not pos.get("entry_thesis"):
+            pos["entry_thesis"] = rationale_by_symbol[pos["symbol"]]
+    for trade in ledger["closed_trades"]:
+        if trade["exit_date"] == today and not trade.get("exit_thesis"):
+            trade["exit_thesis"] = rationale_by_symbol.get(trade["symbol"], "")
+
+    all_prices = {**{c["symbol"]: c["price"] for c in candidates}, **held_prices}
+    total_value = ledger["cash"] + sum(
+        all_prices.get(p["symbol"], p["entry_price"]) * p["shares"] for p in ledger["positions"]
+    )
+    ledger["history"].append({"date": today, "total_value": total_value, "cash": ledger["cash"]})
+    ledger["weekly_reports"].append({"date": today, "events": events})
+
+    ledger_mod.save_ledger(ledger)
+    dashboard = build_dashboard(ledger, all_prices)
+    DASHBOARD_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(DASHBOARD_PATH, "w") as f:
+        json.dump(dashboard, f, indent=2, default=str)
+        f.write("\n")
+
+    print(f"paper_trader: done. Portfolio value ${total_value:,.2f} "
+          f"({dashboard['summary']['total_return_pct']:+.1%} since inception)")
+
+
+if __name__ == "__main__":
+    main()

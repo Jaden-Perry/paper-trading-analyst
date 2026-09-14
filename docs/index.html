@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper Trading Analyst</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --bg: #0b0d12; --panel: #12151c; --border: #22262f; --text: #e7e9ee;
+    --muted: #8b94a3; --accent: #5b8cff; --good: #34c98f; --bad: #e0575a; --later: #6b7280;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f7fb; --panel: #ffffff; --border: #e3e6ec; --text: #191d24;
+      --muted: #616b7a; --accent: #3a63d8; --good: #1f9d6f; --bad: #c94f4f; --later: #7a828f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  header { padding: 28px 24px 12px; max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .meta { color: var(--muted); font-size: 13px; }
+  main { max-width: 1000px; margin: 0 auto; padding: 8px 24px 60px; }
+  section { margin-top: 28px; }
+  section h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 10px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .stat .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .stat .value { font-size: 20px; font-weight: 600; margin-top: 4px; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  .chart-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+  .card .row1 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .card .symbol { font-size: 16px; font-weight: 700; }
+  .card .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .card .thesis { font-size: 13px; margin-top: 8px; line-height: 1.5; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); }
+  .badge.buy { border-color: var(--good); color: var(--good); }
+  .badge.sell { border-color: var(--bad); color: var(--bad); }
+  .badge.hold { border-color: var(--later); color: var(--later); }
+  .empty { color: var(--muted); font-size: 14px; padding: 10px 2px; }
+  details.week { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+  details.week summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+  details.week .event { border-top: 1px solid var(--border); padding: 10px 0; }
+  footer { max-width: 1000px; margin: 0 auto; padding: 0 24px 40px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Paper Trading Analyst</h1>
+  <div class="meta" id="generated">Loading…</div>
+</header>
+<main>
+  <section>
+    <div class="stat-grid" id="summary"></div>
+  </section>
+  <section>
+    <h2>Portfolio value</h2>
+    <div class="chart-wrap"><canvas id="valueChart" height="90"></canvas></div>
+  </section>
+  <section>
+    <h2>Open positions</h2>
+    <div id="open_positions"></div>
+  </section>
+  <section>
+    <h2>Trade history</h2>
+    <div id="closed_trades"></div>
+  </section>
+  <section>
+    <h2>Weekly reports</h2>
+    <div id="weekly_reports"></div>
+  </section>
+</main>
+<footer>Simulated paper-trading account, not connected to any real brokerage. Updates every Friday after market close via GitHub Actions.</footer>
+<script>
+function fmtMoney(n) { return '$' + Number(n).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+function fmtPct(n) { if (n === null || n === undefined) return '—'; return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%'; }
+function pnlClass(n) { return n >= 0 ? 'pos' : 'neg'; }
+function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+async function load() {
+  const res = await fetch('portfolio.json?_=' + Date.now());
+  const data = await res.json();
+
+  document.getElementById('generated').textContent = data.generated_at
+    ? 'Last run: ' + new Date(data.generated_at).toLocaleString()
+    : 'No runs yet - the first Friday run (or a manual "Run workflow") will populate this.';
+
+  renderSummary(data.summary);
+  renderChart(data.value_history);
+  renderOpenPositions(data.open_positions);
+  renderClosedTrades(data.closed_trades);
+  renderWeeklyReports(data.weekly_reports);
+}
+
+function renderSummary(s) {
+  const el = document.getElementById('summary');
+  const stats = [
+    ['Total value', fmtMoney(s.total_value), null],
+    ['Total return', fmtPct(s.total_return_pct), pnlClass(s.total_return_pct)],
+    ['Cash', fmtMoney(s.cash), null],
+    ['Open positions', s.num_open_positions, null],
+    ['Closed trades', s.num_closed_trades, null],
+    ['Win rate', s.win_rate === null ? '—' : (s.win_rate * 100).toFixed(0) + '%', null],
+    ['Max drawdown', '-' + (s.max_drawdown_pct * 100).toFixed(1) + '%', 'neg'],
+  ];
+  el.innerHTML = stats.map(([label, value, cls]) => `
+    <div class="stat">
+      <div class="label">${label}</div>
+      <div class="value ${cls || ''}">${value}</div>
+    </div>
+  `).join('');
+}
+
+let chartInstance = null;
+function renderChart(history) {
+  const ctx = document.getElementById('valueChart');
+  const labels = history.map(h => h.date);
+  const values = history.map(h => h.total_value);
+  if (chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets: [{ label: 'Portfolio value', data: values, borderColor: '#5b8cff', backgroundColor: 'rgba(91,140,255,0.1)', fill: true, tension: 0.2, pointRadius: 2 }] },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: v => '$' + v } } } }
+  });
+}
+
+function renderOpenPositions(positions) {
+  const el = document.getElementById('open_positions');
+  if (!positions.length) { el.innerHTML = '<div class="empty">No open positions.</div>'; return; }
+  el.innerHTML = positions.map(p => `
+    <div class="card">
+      <div class="row1">
+        <div class="symbol">${escapeHtml(p.symbol)}</div>
+        <div class="${pnlClass(p.unrealized_pnl_pct)}">${fmtPct(p.unrealized_pnl_pct)} (${fmtMoney(p.unrealized_pnl)})</div>
+      </div>
+      <div class="sub">Entered ${escapeHtml(p.entry_date)} @ ${fmtMoney(p.entry_price)} · now ${fmtMoney(p.current_price)} · stop ${fmtMoney(p.stop_loss)} · target ${fmtMoney(p.take_profit)} · max hold until ${escapeHtml(p.max_hold_until)}</div>
+      <div class="thesis">${escapeHtml(p.entry_thesis)}</div>
+    </div>
+  `).join('');
+}
+
+function renderClosedTrades(trades) {
+  const el = document.getElementById('closed_trades');
+  if (!trades.length) { el.innerHTML = '<div class="empty">No closed trades yet.</div>'; return; }
+  el.innerHTML = trades.map(t => `
+    <div class="card">
+      <div class="row1">
+        <div class="symbol">${escapeHtml(t.symbol)} <span class="badge">${escapeHtml(t.exit_reason)}</span></div>
+        <div class="${pnlClass(t.realized_pnl_pct)}">${fmtPct(t.realized_pnl_pct)} (${fmtMoney(t.realized_pnl)})</div>
+      </div>
+      <div class="sub">${escapeHtml(t.entry_date)} @ ${fmtMoney(t.entry_price)} → ${escapeHtml(t.exit_date)} @ ${fmtMoney(t.exit_price)}</div>
+      <div class="thesis"><strong>Entry:</strong> ${escapeHtml(t.entry_thesis)}</div>
+      <div class="thesis"><strong>Exit:</strong> ${escapeHtml(t.exit_thesis)}</div>
+    </div>
+  `).join('');
+}
+
+function renderWeeklyReports(reports) {
+  const el = document.getElementById('weekly_reports');
+  if (!reports.length) { el.innerHTML = '<div class="empty">No runs yet.</div>'; return; }
+  el.innerHTML = reports.map((r, i) => `
+    <details class="week" ${i === 0 ? 'open' : ''}>
+      <summary>${escapeHtml(r.date)} — ${r.events.length} event(s)</summary>
+      ${r.events.map(e => `
+        <div class="event">
+          <div class="row1">
+            <span><span class="badge ${escapeHtml(e.action)}">${escapeHtml(e.action)}</span> <strong>${escapeHtml(e.symbol)}</strong></span>
+            <span>${fmtMoney(e.price)}</span>
+          </div>
+          <div class="thesis">${escapeHtml(e.rationale)}</div>
+        </div>
+      `).join('')}
+    </details>
+  `).join('');
+}
+
+load().catch(err => {
+  document.getElementById('generated').textContent = 'Failed to load portfolio.json: ' + err;
+});
+</script>
+</body>
+</html>

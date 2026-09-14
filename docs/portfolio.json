@@ -1,0 +1,17 @@
+{
+  "generated_at": null,
+  "summary": {
+    "total_value": 1000.0,
+    "cash": 1000.0,
+    "initial_capital": 1000.0,
+    "total_return_pct": 0.0,
+    "num_open_positions": 0,
+    "num_closed_trades": 0,
+    "win_rate": null,
+    "max_drawdown_pct": 0.0
+  },
+  "open_positions": [],
+  "closed_trades": [],
+  "value_history": [],
+  "weekly_reports": []
+}

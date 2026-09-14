@@ -1,0 +1,17 @@
+{
+  "initial_capital": 1000.0,
+  "position_pct": 0.15,
+  "max_positions": 6,
+  "stop_loss_pct": 0.08,
+  "take_profit_pct": 0.20,
+  "max_hold_weeks": 7,
+  "min_price": 10.0,
+  "min_avg_dollar_volume": 5000000,
+  "min_market_cap": 2000000000,
+  "min_weekly_volatility_pct": 1.5,
+  "momentum_lookback_days": 63,
+  "ma_period_days": 50,
+  "volume_surge_ratio": 1.5,
+  "max_pe": 60,
+  "news_feed_url_template": "https://news.google.com/rss/search?q={symbol}+stock&hl=en-US&gl=US&ceid=US:en"
+}
