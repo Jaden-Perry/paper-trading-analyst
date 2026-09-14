@@ -13,5 +13,11 @@
   "ma_period_days": 50,
   "volume_surge_ratio": 1.5,
   "max_pe": 60,
-  "news_feed_url_template": "https://news.google.com/rss/search?q={symbol}+stock&hl=en-US&gl=US&ceid=US:en"
+  "news_feed_url_template": "https://news.google.com/rss/search?q={symbol}+stock&hl=en-US&gl=US&ceid=US:en",
+  "benchmarks": [
+    {"symbol": "SPY", "name": "S&P 500 (SPY)"},
+    {"symbol": "QQQ", "name": "Nasdaq 100 (QQQ)"},
+    {"symbol": "QAI", "name": "Multi-Strategy Hedge Fund ETF (QAI)"},
+    {"symbol": "GURU", "name": "Top Hedge Fund Holdings Index (GURU)"}
+  ]
 }

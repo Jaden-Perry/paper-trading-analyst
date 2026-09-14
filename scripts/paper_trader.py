@@ -15,6 +15,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import benchmarks
 import ledger as ledger_mod
 import market_news
 import portfolio_engine
@@ -64,7 +65,24 @@ def max_drawdown_pct(history: list[dict]) -> float:
     return abs(worst)
 
 
-def build_dashboard(ledger: dict, all_prices: dict[str, float]) -> dict:
+def normalized_return_history(entries: list[dict], value_key: str) -> list[dict]:
+    """Converts a [{"date":..., value_key:...}, ...] series into cumulative
+    % return since the first entry, so series with different starting scales
+    (e.g. portfolio dollars vs. an index's share price) can be plotted on the
+    same axis.
+    """
+    if not entries:
+        return []
+    base = entries[0][value_key]
+    if not base:
+        return []
+    return [
+        {"date": e["date"], "return_pct": (e[value_key] - base) / base}
+        for e in entries
+    ]
+
+
+def build_dashboard(ledger: dict, all_prices: dict[str, float], benchmark_config: list[dict]) -> dict:
     open_positions = []
     for pos in ledger["positions"]:
         price = all_prices.get(pos["symbol"], pos["entry_price"])
@@ -84,6 +102,17 @@ def build_dashboard(ledger: dict, all_prices: dict[str, float]) -> dict:
     wins = [t for t in ledger["closed_trades"] if t["realized_pnl"] > 0]
     win_rate = len(wins) / len(ledger["closed_trades"]) if ledger["closed_trades"] else None
 
+    benchmark_names = {b["symbol"]: b["name"] for b in benchmark_config}
+    benchmark_history = ledger.get("benchmark_history", {})
+    benchmarks_out = {
+        symbol: {
+            "name": benchmark_names.get(symbol, symbol),
+            "return_history": normalized_return_history(entries, "price"),
+        }
+        for symbol, entries in benchmark_history.items()
+        if entries
+    }
+
     return {
         "generated_at": now_iso(),
         "summary": {
@@ -99,6 +128,8 @@ def build_dashboard(ledger: dict, all_prices: dict[str, float]) -> dict:
         "open_positions": open_positions,
         "closed_trades": closed_trades,
         "value_history": ledger["history"],
+        "portfolio_return_history": normalized_return_history(ledger["history"], "total_value"),
+        "benchmarks": benchmarks_out,
         "weekly_reports": list(reversed(ledger["weekly_reports"])),
     }
 
@@ -154,8 +185,18 @@ def main():
     ledger["history"].append({"date": today, "total_value": total_value, "cash": ledger["cash"]})
     ledger["weekly_reports"].append({"date": today, "events": events})
 
+    benchmark_config = config.get("benchmarks", [])
+    ledger.setdefault("benchmark_history", {})  # older ledgers predate this field
+    bm_prices = benchmarks.fetch_benchmark_prices(benchmark_config)
+    for b in benchmark_config:
+        symbol = b["symbol"]
+        if symbol in bm_prices:
+            ledger["benchmark_history"].setdefault(symbol, []).append(
+                {"date": today, "price": bm_prices[symbol]}
+            )
+
     ledger_mod.save_ledger(ledger)
-    dashboard = build_dashboard(ledger, all_prices)
+    dashboard = build_dashboard(ledger, all_prices, benchmark_config)
     DASHBOARD_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(DASHBOARD_PATH, "w") as f:
         json.dump(dashboard, f, indent=2, default=str)

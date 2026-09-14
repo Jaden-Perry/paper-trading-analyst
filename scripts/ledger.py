@@ -18,6 +18,7 @@ def load_ledger(initial_capital: float) -> dict:
             "closed_trades": [],
             "history": [],
             "weekly_reports": [],
+            "benchmark_history": {},
         }
     with open(LEDGER_PATH) as f:
         return json.load(f)

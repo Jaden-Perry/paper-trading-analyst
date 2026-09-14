@@ -57,6 +57,12 @@
     <h2>Portfolio value</h2>
     <div class="chart-wrap"><canvas id="valueChart" height="90"></canvas></div>
   </section>
+  <section id="benchmark_section">
+    <h2>Compare to benchmark</h2>
+    <div class="sub" style="margin-bottom:10px;">Real hedge funds don't publish daily returns publicly, so the "hedge fund" options are publicly-traded ETFs that track hedge-fund-style strategies or disclosed holdings - not actual fund NAV data.</div>
+    <select id="benchmarkSelect" style="background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;margin-bottom:10px;"></select>
+    <div class="chart-wrap"><canvas id="benchmarkChart" height="90"></canvas></div>
+  </section>
   <section>
     <h2>Open positions</h2>
     <div id="open_positions"></div>
@@ -94,6 +100,7 @@ async function load() {
 
   renderSummary(data.summary);
   renderChart(data.value_history);
+  renderBenchmarkSection(data);
   renderOpenPositions(data.open_positions);
   renderClosedTrades(data.closed_trades);
   renderWeeklyReports(data.weekly_reports);
@@ -128,6 +135,55 @@ function renderChart(history) {
     type: 'line',
     data: { labels, datasets: [{ label: 'Portfolio value', data: values, borderColor: '#5b8cff', backgroundColor: 'rgba(91,140,255,0.1)', fill: true, tension: 0.2, pointRadius: 2 }] },
     options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: v => '$' + v } } } }
+  });
+}
+
+let benchmarkChartInstance = null;
+function renderBenchmarkSection(data) {
+  const select = document.getElementById('benchmarkSelect');
+  const symbols = Object.keys(data.benchmarks || {});
+  if (!symbols.length) {
+    document.getElementById('benchmark_section').style.display = 'none';
+    return;
+  }
+  document.getElementById('benchmark_section').style.display = '';
+  select.innerHTML = '<option value="">— Select a benchmark —</option>' +
+    symbols.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(data.benchmarks[s].name)}</option>`).join('');
+  select.onchange = () => renderBenchmarkChart(data, select.value);
+  renderBenchmarkChart(data, '');
+}
+
+function renderBenchmarkChart(data, symbol) {
+  const canvas = document.getElementById('benchmarkChart');
+  if (benchmarkChartInstance) { benchmarkChartInstance.destroy(); benchmarkChartInstance = null; }
+  if (!symbol || !data.benchmarks[symbol]) return;
+
+  const portfolioSeries = data.portfolio_return_history || [];
+  const benchSeries = data.benchmarks[symbol].return_history || [];
+  const allDates = Array.from(new Set([...portfolioSeries.map(p => p.date), ...benchSeries.map(p => p.date)])).sort();
+  const portfolioMap = Object.fromEntries(portfolioSeries.map(p => [p.date, p.return_pct * 100]));
+  const benchMap = Object.fromEntries(benchSeries.map(p => [p.date, p.return_pct * 100]));
+
+  benchmarkChartInstance = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: allDates,
+      datasets: [
+        {
+          label: 'Your strategy', data: allDates.map(d => d in portfolioMap ? portfolioMap[d] : null),
+          borderColor: '#5b8cff', backgroundColor: 'rgba(91,140,255,0.08)', tension: 0.2, pointRadius: 2, spanGaps: true,
+        },
+        {
+          label: data.benchmarks[symbol].name, data: allDates.map(d => d in benchMap ? benchMap[d] : null),
+          borderColor: '#e0b13b', backgroundColor: 'rgba(224,177,59,0.08)', tension: 0.2, pointRadius: 2, spanGaps: true,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true, labels: { color: getComputedStyle(document.body).getPropertyValue('--text') } } },
+      scales: { y: { ticks: { callback: v => v + '%' } } },
+    },
   });
 }
 
