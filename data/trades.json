@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-14T01:30:41+00:00",
-  "summary": {
-    "total_value": 1000.0,
-    "cash": 100.0,
-    "initial_capital": 1000.0,
-    "total_return_pct": 0.0,
-    "num_open_positions": 6,
-    "num_closed_trades": 0,
-    "win_rate": null,
-    "max_drawdown_pct": 0.0
-  },
-  "open_positions": [
+  "cash": 100.0,
+  "initial_capital": 1000.0,
+  "positions": [
     {
       "symbol": "MRNA",
       "shares": 1.0418837169422053,
@@ -35,10 +26,7 @@
         "market_cap": 57477992448,
         "pe_vs_median_pct": null,
         "score": 2.4002820908721763
-      },
-      "current_price": 143.97000122070312,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0
+      }
     },
     {
       "symbol": "CRM",
@@ -64,10 +52,7 @@
         "market_cap": 203873566720,
         "pe_vs_median_pct": -8.056103452266035,
         "score": 1.0285352830318093
-      },
-      "current_price": 247.72000122070312,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0
+      }
     },
     {
       "symbol": "T",
@@ -93,10 +78,7 @@
         "market_cap": 178573164544,
         "pe_vs_median_pct": -65.14089394991659,
         "score": 0.9587479247905561
-      },
-      "current_price": 26.059999465942383,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0
+      }
     },
     {
       "symbol": "DVN",
@@ -122,10 +104,7 @@
         "market_cap": 55253000192,
         "pe_vs_median_pct": -55.74220183616383,
         "score": 0.9046917053250076
-      },
-      "current_price": 50.22999954223633,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0
+      }
     },
     {
       "symbol": "CMCSA",
@@ -151,10 +130,7 @@
         "market_cap": 89425649664,
         "pe_vs_median_pct": -67.26363843991531,
         "score": 0.8876323968228401
-      },
-      "current_price": 25.200000762939453,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0
+      }
     },
     {
       "symbol": "REGN",
@@ -180,14 +156,11 @@
         "market_cap": 80458293248,
         "pe_vs_median_pct": -21.59811467238907,
         "score": 0.8860209508001375
-      },
-      "current_price": 781.489990234375,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0
+      }
     }
   ],
   "closed_trades": [],
-  "value_history": [
+  "history": [
     {
       "date": "2026-09-14",
       "total_value": 1000.0,
