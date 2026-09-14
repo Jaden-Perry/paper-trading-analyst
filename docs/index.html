@@ -76,6 +76,7 @@ function fmtMoney(n) { return '$' + Number(n).toLocaleString(undefined, {minimum
 function fmtPct(n) { if (n === null || n === undefined) return '—'; return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%'; }
 function pnlClass(n) { return n >= 0 ? 'pos' : 'neg'; }
 function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function nameOf(obj) { return obj.name || (obj.entry_signals && obj.entry_signals.name) || (obj.signals && obj.signals.name) || ''; }
 
 async function load() {
   const res = await fetch('portfolio.json?_=' + Date.now());
@@ -130,7 +131,7 @@ function renderOpenPositions(positions) {
   el.innerHTML = positions.map(p => `
     <div class="card">
       <div class="row1">
-        <div class="symbol">${escapeHtml(p.symbol)}</div>
+        <div class="symbol">${escapeHtml(p.symbol)} <span class="sub">${escapeHtml(nameOf(p))}</span></div>
         <div class="${pnlClass(p.unrealized_pnl_pct)}">${fmtPct(p.unrealized_pnl_pct)} (${fmtMoney(p.unrealized_pnl)})</div>
       </div>
       <div class="sub">Entered ${escapeHtml(p.entry_date)} @ ${fmtMoney(p.entry_price)} · now ${fmtMoney(p.current_price)} · stop ${fmtMoney(p.stop_loss)} · target ${fmtMoney(p.take_profit)} · max hold until ${escapeHtml(p.max_hold_until)}</div>
@@ -145,7 +146,7 @@ function renderClosedTrades(trades) {
   el.innerHTML = trades.map(t => `
     <div class="card">
       <div class="row1">
-        <div class="symbol">${escapeHtml(t.symbol)} <span class="badge">${escapeHtml(t.exit_reason)}</span></div>
+        <div class="symbol">${escapeHtml(t.symbol)} <span class="sub">${escapeHtml(nameOf(t))}</span> <span class="badge">${escapeHtml(t.exit_reason)}</span></div>
         <div class="${pnlClass(t.realized_pnl_pct)}">${fmtPct(t.realized_pnl_pct)} (${fmtMoney(t.realized_pnl)})</div>
       </div>
       <div class="sub">${escapeHtml(t.entry_date)} @ ${fmtMoney(t.entry_price)} → ${escapeHtml(t.exit_date)} @ ${fmtMoney(t.exit_price)}</div>
@@ -164,7 +165,7 @@ function renderWeeklyReports(reports) {
       ${r.events.map(e => `
         <div class="event">
           <div class="row1">
-            <span><span class="badge ${escapeHtml(e.action)}">${escapeHtml(e.action)}</span> <strong>${escapeHtml(e.symbol)}</strong></span>
+            <span><span class="badge ${escapeHtml(e.action)}">${escapeHtml(e.action)}</span> <strong>${escapeHtml(e.symbol)}</strong> <span class="sub">${escapeHtml(nameOf(e))}</span></span>
             <span>${fmtMoney(e.price)}</span>
           </div>
           <div class="thesis">${escapeHtml(e.rationale)}</div>

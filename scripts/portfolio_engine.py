@@ -53,6 +53,7 @@ def decide(
             ledger["closed_trades"].append(
                 {
                     "symbol": symbol,
+                    "name": pos.get("name") or (cand.get("name") if cand else symbol),
                     "shares": pos["shares"],
                     "entry_price": pos["entry_price"],
                     "entry_date": pos["entry_date"],
@@ -69,6 +70,7 @@ def decide(
                 {
                     "action": "sell",
                     "symbol": symbol,
+                    "name": pos.get("name") or (cand.get("name") if cand else symbol),
                     "price": price,
                     "exit_reason": exit_reason,
                     "realized_pnl": realized_pnl,
@@ -83,6 +85,7 @@ def decide(
                 {
                     "action": "hold",
                     "symbol": symbol,
+                    "name": pos.get("name") or (cand.get("name") if cand else symbol),
                     "price": price,
                     "unrealized_pnl_pct": (price - pos["entry_price"]) / pos["entry_price"],
                     "entry_thesis": pos.get("entry_thesis", ""),
@@ -113,6 +116,7 @@ def decide(
             shares = position_value / price
             new_pos = {
                 "symbol": c["symbol"],
+                "name": c.get("name", c["symbol"]),
                 "shares": shares,
                 "entry_price": price,
                 "entry_date": today,
@@ -127,7 +131,14 @@ def decide(
             held_symbols.add(c["symbol"])
             open_slots -= 1
             events.append(
-                {"action": "buy", "symbol": c["symbol"], "price": price, "shares": shares, "signals": c}
+                {
+                    "action": "buy",
+                    "symbol": c["symbol"],
+                    "name": c.get("name", c["symbol"]),
+                    "price": price,
+                    "shares": shares,
+                    "signals": c,
+                }
             )
 
     return ledger, events
