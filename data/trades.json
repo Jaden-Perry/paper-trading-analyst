@@ -170,6 +170,11 @@
       "date": "2026-09-14",
       "total_value": 1000.0,
       "cash": 100.0
+    },
+    {
+      "date": "2026-09-14",
+      "total_value": 1000.0,
+      "cash": 100.0
     }
   ],
   "weekly_reports": [
@@ -860,10 +865,367 @@
           "rationale": "REGN remains a HOLD as its original value-momentum thesis persists: strong price momentum (+27.8%) alongside a trailing P/E 22% below the peer median suggested an attractively priced stock with positive price action. Headlines describing REGN as a 'credible value stock' and noting a climb after a recent (unspecified) update are broadly supportive but don't pinpoint a clear catalyst, so part of the move looks technical. With no signal reversal detected, the system continues to hold the position under the original thesis."
         }
       ]
+    },
+    {
+      "date": "2026-09-14",
+      "events": [
+        {
+          "action": "hold",
+          "symbol": "MRNA",
+          "name": "Moderna",
+          "sector": "Healthcare",
+          "price": 143.97000122070312,
+          "unrealized_pnl_pct": 0.0,
+          "entry_thesis": "The system bought MRNA after detecting explosive momentum (+190% over the lookback window) and a price far above its moving average (+58%), despite volume running below baseline, indicating the move is being driven by strong directional conviction rather than heavy new trading interest. Headlines point to a mix of profit-taking debate ('too late to buy?') and analyst optimism around Moderna's oncology and vaccine pipeline, suggesting the rally is fundamentally supported but already extended. The strategy's entry thesis is that the trend remains intact and momentum can continue in the near term, while acknowledging the stock has already had an outsized run.",
+          "signals": {
+            "symbol": "MRNA",
+            "name": "Moderna",
+            "sector": "Healthcare",
+            "price": 143.97000122070312,
+            "momentum_pct": 190.02820908721762,
+            "above_ma": true,
+            "ma_pct_diff": 58.14518577972707,
+            "volume_ratio": 0.6744767843073679,
+            "volume_surge": false,
+            "weekly_volatility_pct": 14.66061593287834,
+            "trailing_pe": null,
+            "market_cap": 57477992448,
+            "pe_vs_median_pct": null,
+            "score": 2.4002820908721763
+          },
+          "headlines": [
+            {
+              "source": "MRNA news",
+              "title": "symbol__ Stock Quote Price and Forecast - edition.cnn.com",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiVkFVX3lxTE1USDF1b3VYTjlsUUtDQmpKSUpZbmFyX1FFS292eTR4NzFHYmVrZXlESHY1OEVKWjVWbWhFR2NKZEJBRnQ3VmRIWGVoSXRscHM5U2g5OGdR?oc=5\" target=\"_blank\">symbol__ Stock Quote Price and ",
+              "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1USDF1b3VYTjlsUUtDQmpKSUpZbmFyX1FFS292eTR4NzFHYmVrZXlESHY1OEVKWjVWbWhFR2NKZEJBRnQ3VmRIWGVoSXRscHM5U2g5OGdR?oc=5"
+            },
+            {
+              "source": "MRNA news",
+              "title": "Is It Too Late to Buy Moderna Stock After Its 127% Surge? - Yahoo Finance",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMilAFBVV95cUxQbjZjc1pJOUdxUjIzZHJHdmE1TGJOM0JSVkZYTlR1V24xMHQ4Tm1XME1SVlFhdURsZDAtbWMxbzNPRWdQejVydmJpWkxIaDBvTDdzZHA4TXJQOFJ1ZXppV0RXbEI3b1d3VllnQ1AycW5RMk1HRW13ZGRxZGd5UG",
+              "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQbjZjc1pJOUdxUjIzZHJHdmE1TGJOM0JSVkZYTlR1V24xMHQ4Tm1XME1SVlFhdURsZDAtbWMxbzNPRWdQejVydmJpWkxIaDBvTDdzZHA4TXJQOFJ1ZXppV0RXbEI3b1d3VllnQ1AycW5RMk1HRW13ZGRxZGd5UG5xZFlERTFfamlLVjU0aDcyQmFSQkMy?oc=5"
+            },
+            {
+              "source": "MRNA news",
+              "title": "MRNA Stock Rallies Over 40% In June: Moderna Bets Its Future On Cancer, Autoimmune Disease And AI-Powered mRNA - Stocktwits",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxOQlR3OUZiR0JORDRIakg1SU9GV0JleHphU2c4NjQ2SWhZUXRibG8ydGRJTU5EMm0tdmpleVZWS05Tdm5fVTZqSlZVajdUQm1ycFlybVdWMDJJTU80TVN3cWI4eGRGMHpyMTJ3QU02c1BFYlZTdGFDV0hKbDY4Zm",
+              "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOQlR3OUZiR0JORDRIakg1SU9GV0JleHphU2c4NjQ2SWhZUXRibG8ydGRJTU5EMm0tdmpleVZWS05Tdm5fVTZqSlZVajdUQm1ycFlybVdWMDJJTU80TVN3cWI4eGRGMHpyMTJ3QU02c1BFYlZTdGFDV0hKbDY4ZmxZb0U4Z3p4X3MwSmlLLXV6cWtGYzBCRlNDT2czNG9TbW4xYThOaEkteGRlTlViTmlz?oc=5"
+            },
+            {
+              "source": "MRNA news",
+              "title": "Moderna Shares Are Up 350% in 2026. Is the Stock a Buy Now? - global.morningstar.com",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxOWmVHR29ISkZzb21LSEV1dkhpN3FLMTVLdWhqMXRYdUFnUjVqTldVTUJ0QXh2Y0Z2NTI2SXhJZ3JlNFJPblpVa3FNNEZfZVBERkVaS3lsT0pmcHFjdzJuNXB5ZUhVOEEzS1I1OWxZLVBCSmhQMWwxblgxbDJEaF",
+              "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWmVHR29ISkZzb21LSEV1dkhpN3FLMTVLdWhqMXRYdUFnUjVqTldVTUJ0QXh2Y0Z2NTI2SXhJZ3JlNFJPblpVa3FNNEZfZVBERkVaS3lsT0pmcHFjdzJuNXB5ZUhVOEEzS1I1OWxZLVBCSmhQMWwxblgxbDJEaFRLNmFGWF8wQnNEUmVYeExVbjNSNHgwV3c?oc=5"
+            },
+            {
+              "source": "MRNA news",
+              "title": "Rep. Maria Elvira Salazar Sells Moderna, Inc. (NASDAQ:MRNA) Stock - MarketBeat",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxNc2JlTFo0NHhQckNSVEtRb3VzaWE2QUhGOFl0TFUyUDdkTlpfQTVfVFE4bXRad3dWUmFlcHVzbkExUmFPWnAwSzNRUlYtZ1AxaTc0aUw4bkgyRHhZU1N4anBVY25QaUZnTXVQeC1Da0h5NUM3Yzdpb1V1cUNXeE",
+              "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNc2JlTFo0NHhQckNSVEtRb3VzaWE2QUhGOFl0TFUyUDdkTlpfQTVfVFE4bXRad3dWUmFlcHVzbkExUmFPWnAwSzNRUlYtZ1AxaTc0aUw4bkgyRHhZU1N4anBVY25QaUZnTXVQeC1Da0h5NUM3Yzdpb1V1cUNXeEFrdG9jUnk2QUlWNm51OEE5elNRWWJ6Skl4azAwOG94RnR6R0w5RzlycERudC1hTlNUSXpFUmI4ZERPZ2hWRGF4cHY?oc=5"
+            }
+          ],
+          "rationale": "The system continues to hold MRNA on the strength of its original momentum signal, which was extreme (+190%) even though volume remained below baseline, implying the rally reflects conviction rather than crowd participation. Headlines remain mixed, with 'too late to buy?' framing and a politician's stock sale contrasting against pipeline optimism in oncology and mRNA/AI applications, so the news backdrop is more supportive-but-cautious than a clear new catalyst. The original momentum-continuation thesis still holds with no reversal or exit trigger hit, so the position is maintained unchanged."
+        },
+        {
+          "action": "hold",
+          "symbol": "CRM",
+          "name": "Salesforce",
+          "sector": "Technology",
+          "price": 247.72000122070312,
+          "unrealized_pnl_pct": 0.0,
+          "entry_thesis": "CRM was bought on strong momentum (+48.8%) and a price well above its moving average (+24.7%), with a trailing P/E slightly below the peer-group median, suggesting the system sees room for the trend to continue at a reasonable valuation. Headlines are mixed: a fresh analyst downgrade and profit-taking amid a rate-driven software selloff contrast with news of a large new AI customer agent deal (30,000 customers), which may be underpinning renewed buying interest. The system's entry thesis is that the recent AI-driven catalyst outweighs near-term valuation caution and downgrade risk.",
+          "signals": {
+            "symbol": "CRM",
+            "name": "Salesforce",
+            "sector": "Technology",
+            "price": 247.72000122070312,
+            "momentum_pct": 48.82547657704791,
+            "above_ma": true,
+            "ma_pct_diff": 24.728987443028576,
+            "volume_ratio": 0.7840436072510424,
+            "volume_surge": false,
+            "weekly_volatility_pct": 6.291295640507541,
+            "trailing_pe": 22.684982,
+            "market_cap": 203873566720,
+            "pe_vs_median_pct": -8.056103452266035,
+            "score": 1.0285352830318093
+          },
+          "headlines": [
+            {
+              "source": "CRM news",
+              "title": "CRM Stock Snags Second Rating Downgrade This Month \u2013 Analyst Says Risk/Reward On Salesforce Balanced In Absence Of Notable Growth Inflection - Stocktwits",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqgJBVV95cUxOT1pNaUI0WUxZd0R1NXFySDF2aHk1bkJFc3hzY1c4VFE3RFlnWnBUazJ2TW50N0ZPaXZKUHNJTi1rTjhSWEhCWWo1dlVTdGV5SHR0S1RCSS0zMWthS0xMMmVJLXF6eDMyNzlTRE9OWWtlbFg0d1RsbkZyXy1pUm",
+              "link": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxOT1pNaUI0WUxZd0R1NXFySDF2aHk1bkJFc3hzY1c4VFE3RFlnWnBUazJ2TW50N0ZPaXZKUHNJTi1rTjhSWEhCWWo1dlVTdGV5SHR0S1RCSS0zMWthS0xMMmVJLXF6eDMyNzlTRE9OWWtlbFg0d1RsbkZyXy1pUmozMXRSbGdad1AxeXFXWVUzQXhubXpIVHc0WW1kM3RFbVJaaktQejJvTE9XdmRyNEhUQTRQU3AzOE5jcnR6M3djUFplejNZSE9MVUdwRndjQmt1eEl2cGoza2I0N1pwSU1qXzNlMDMwbUJDR2h1QTI2MVZNcFpFWmtqZzR3c293WWdBRVNwQm1MOGxFNDRMVVY3VUt3Zk9RTE5IOUpldFI4aU9hQ19jUlRvLWdB?oc=5"
+            },
+            {
+              "source": "CRM news",
+              "title": "Salesforce stock falls as investors appear to take profits amid a broader rate-driven software selloff - Quiver Quantitative",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMi0AFBVV95cUxQRG9HY3I1dUhBNWdxemFuOWhoSXNaTUg5cVRoV0k2LXZHSks5Umh6aktWTHgya0ZqZVdYRDVJRTA1R1d3aXpVSGtYMUUyMDZsWjV4Z3YxaUxCNFF2Z0ZDNG42SHpNb3hGdXVYQzl6RThXYWdTWk9wcmgyeHJHcW",
+              "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQRG9HY3I1dUhBNWdxemFuOWhoSXNaTUg5cVRoV0k2LXZHSks5Umh6aktWTHgya0ZqZVdYRDVJRTA1R1d3aXpVSGtYMUUyMDZsWjV4Z3YxaUxCNFF2Z0ZDNG42SHpNb3hGdXVYQzl6RThXYWdTWk9wcmgyeHJHcW5VeFJsblU1eC1TQ190Y0RQeUV6ZXctM3JQN2YySS1nOWwyYWJwWlg2MjJTc0JZMUdPZWxaYnltX2gtVXEtZjh3WExzY1hXWlhVWXhmdXBaZ0ty?oc=5"
+            },
+            {
+              "source": "CRM news",
+              "title": "Salesforce (CRM) Closes Early AI Customer Agent Deal, Adding 30,000 Customers - simplywall.st",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMixAFBVV95cUxNM3ROazRCMlZWRjVMU1ZkdnozRmJMcmtJZUw0SkJWOVEwcXFMQ3FCZHRuN19ONkIwUG42c0hPWGt3N29iVkJiNmVmS0w1SHdKbWI5U2oxTjRFNmxhZzZ4X25jXzBxRHYtOWNJZUlENHNEVnZ6b01xYy1pUG9FSD",
+              "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNM3ROazRCMlZWRjVMU1ZkdnozRmJMcmtJZUw0SkJWOVEwcXFMQ3FCZHRuN19ONkIwUG42c0hPWGt3N29iVkJiNmVmS0w1SHdKbWI5U2oxTjRFNmxhZzZ4X25jXzBxRHYtOWNJZUlENHNEVnZ6b01xYy1pUG9FSDVESUNOci11SWhSM2E4UjRnQjAtdHFaVlQ5bWxsUk1nLTNLSExBYWNJNE5QbzJZWFhtWXBjcW1XMHVjczU2dXR1RHBRU21O0gHKAUFVX3lxTE1SNGhQWlFzeUFZQWFFc1pRVzNmN2VlNTJzWE9SQV9sNXRuQlJWRHlYUUpTQTJNWFZpdlV0Rno2ZjRySGp6dGRaTXFoX1VHYUJxZjBFUGNEcmk2dGNRR3p5SUtneElyV0tua2VPT2QxaUhTZjRiZHF6dWlsT1NYMWMyZldQc0Q1SWp6clBYR1F4djNvOUxtdmpjR3FINUl3RE5nWWxST0FKUlZhVUtvVDZGY0lFVEJTcThnb0NYd3l5YUhXal8xcUY2QlE?oc=5"
+            },
+            {
+              "source": "CRM news",
+              "title": "Is CRM Stock Getting Riskier As It Gets More Profitable? - Trefis",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMitgFBVV95cUxOdWY3dmVoSWJSLVhVelBZRFpNTk5USDNUeTNmZXhfWnNWRnAxV1lQVnFqdVFyODhQcU5YTy05RE0wUncxdHAxUGkwTkEyUEVOcGl4MHY3R3hPREFOWldrYUYyTVVpN2ZjdGlTekVST3E1NFo1THFHRU1JRGtBaW",
+              "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOdWY3dmVoSWJSLVhVelBZRFpNTk5USDNUeTNmZXhfWnNWRnAxV1lQVnFqdVFyODhQcU5YTy05RE0wUncxdHAxUGkwTkEyUEVOcGl4MHY3R3hPREFOWldrYUYyTVVpN2ZjdGlTekVST3E1NFo1THFHRU1JRGtBaWl2SmxSVF9PNXNWVm1EZTlkXzI3Q1FPYmtZVEZmd01yMkpIVkszNU9mZ0paZk9vaXpwTlJGUG1rZw?oc=5"
+            },
+            {
+              "source": "CRM news",
+              "title": "CRM Stock Soars 13% After-Hours \u2014 Salesforce Crushes Earnings, Raises Guidance And Expands Partnership With Anthropic\u2019s Claude - Yahoo Finance",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMikwFBVV95cUxPZ2xmQXAtT2Y4Q1pITXYydG5obFRURzRwZlNaNkxmdVVXN1V5R1J2TjNSdVc4R2RfNmVjeFVaSnhMWFhTY19kd09EbFNBYWVjWjMwQTIxbGhZRzBUUWN6ZklIblotV3VHWERFVnRROUxIVGdKa1dwMkY0M19GTW",
+              "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZ2xmQXAtT2Y4Q1pITXYydG5obFRURzRwZlNaNkxmdVVXN1V5R1J2TjNSdVc4R2RfNmVjeFVaSnhMWFhTY19kd09EbFNBYWVjWjMwQTIxbGhZRzBUUWN6ZklIblotV3VHWERFVnRROUxIVGdKa1dwMkY0M19GTWxjUDFJWGNSWW4tNXMwRTRRMTlCenc?oc=5"
+            }
+          ],
+          "rationale": "CRM is being held as the entry thesis\u2014strong momentum plus a below-median P/E\u2014remains intact, with no stop-loss, take-profit, or reversal signal triggered. Headlines are split between a second analyst downgrade and profit-taking in a rate-driven software selloff versus a large new AI customer agent deal and an expanded Anthropic partnership, keeping the AI-driven growth catalyst as the more constructive story. The system judges the AI catalyst still outweighs valuation/downgrade concerns, so the trade stands."
+        },
+        {
+          "action": "hold",
+          "symbol": "T",
+          "name": "AT&T",
+          "sector": "Communication Services",
+          "price": 26.059999465942383,
+          "unrealized_pnl_pct": 0.0,
+          "entry_thesis": "AT&T was purchased on a combination of positive momentum (+13.3%) and a very low trailing P/E (8.6, 65% below the screened universe median), indicating the model sees a cheap stock with an improving trend. The provided headlines don't directly explain the move\u2014most are unrelated to AT&T specifically\u2014though one piece notes the stock 'looks undervalued' after a large historical return, consistent with a value-momentum combination rather than a clear news catalyst. The strategy's thesis here is a value-plus-momentum setup rather than a specific event-driven trade.",
+          "signals": {
+            "symbol": "T",
+            "name": "AT&T",
+            "sector": "Communication Services",
+            "price": 26.059999465942383,
+            "momentum_pct": 13.304345504097318,
+            "above_ma": true,
+            "ma_pct_diff": 9.203058416003474,
+            "volume_ratio": 0.6234461863269606,
+            "volume_surge": false,
+            "weekly_volatility_pct": 3.4912416765359917,
+            "trailing_pe": 8.60066,
+            "market_cap": 178573164544,
+            "pe_vs_median_pct": -65.14089394991659,
+            "score": 0.9587479247905561
+          },
+          "headlines": [
+            {
+              "source": "T news",
+              "title": "Adobe's user growth is soaring, but its stock rating isn't - Yahoo Finance Singapore",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiiAFBVV95cUxOLXo1YjZJdjQ3MWYzRU9XVUV5X3pESC1TeEYxNGRoNHFFRUdOX0lIbVltSUJnLWpOQjBKcGRRbzhVaGx5R19BR1p4d2dsM2lsSk13VW1ZVWU2a25iQzJ1cmJaSkg1bS1VbEQ4ZlhTeDNOaGU3Rkl4blZHMW1kTk",
+              "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOLXo1YjZJdjQ3MWYzRU9XVUV5X3pESC1TeEYxNGRoNHFFRUdOX0lIbVltSUJnLWpOQjBKcGRRbzhVaGx5R19BR1p4d2dsM2lsSk13VW1ZVWU2a25iQzJ1cmJaSkg1bS1VbEQ4ZlhTeDNOaGU3Rkl4blZHMW1kTkdKM2R1Q3VieXB4?oc=5"
+            },
+            {
+              "source": "T news",
+              "title": "Oil Is $100, The 10-Year Is Near 5%. Why Doesn\u2019t The Stock Market Care? - barchart.com",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMirgFBVV95cUxNOVJETDY4empUUlN0Ulo5emZLVkNHYjFYLUxnbkM0aEViejdhYTE2QlUzM2JaSFFVQ1lkcHZqSnZtMEE0UGJVMTRUeTNPZzYxbHJuR1NlNmRXZWlXbG5qT1lmbkV3NzVIVHJxX3NvSjJuTWZKMy1JZ3VDdTJGTG",
+              "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNOVJETDY4empUUlN0Ulo5emZLVkNHYjFYLUxnbkM0aEViejdhYTE2QlUzM2JaSFFVQ1lkcHZqSnZtMEE0UGJVMTRUeTNPZzYxbHJuR1NlNmRXZWlXbG5qT1lmbkV3NzVIVHJxX3NvSjJuTWZKMy1JZ3VDdTJGTGx0S01qTzNnUVhuZXlIVnlLLXlRblJ4cC1TTHJER2sxQ2ExZ2hYdnR6T2V3MDVtUnc?oc=5"
+            },
+            {
+              "source": "T news",
+              "title": "Berkshire Hathaway Stock Is Trailing the S&P 500 by About 10 Points This Year. History Says That Usually Doesn't Last. - The Motley Fool",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMi9gFBVV95cUxPVm1keGk4ZDRZUzVtN0NoOUFEUXN4M2dQOTFjXzNsZWl0d2ptMzlHeXFmX2gxQzA4Q0J5MkFZblRBYk5QMk1rcWNkMjl3NTBfckFNdXB0VU81YW56M2JqZmV3ZVdLMW0xTUZFZGJUMHhqVFRVMkgxNXFFQmw3Zl",
+              "link": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxPVm1keGk4ZDRZUzVtN0NoOUFEUXN4M2dQOTFjXzNsZWl0d2ptMzlHeXFmX2gxQzA4Q0J5MkFZblRBYk5QMk1rcWNkMjl3NTBfckFNdXB0VU81YW56M2JqZmV3ZVdLMW0xTUZFZGJUMHhqVFRVMkgxNXFFQmw3ZlhqMzFvQWJVTWJyckNUMzF1UGRGTTF1THRuZ0hXYmRyWnNaY3ZLSVlRZmtFUzROTWJTbXIzdk13YTBTWDdkLUFmak9xNTlMVm9rdDMwTnZEc0dPQlZIMEl2VU5rSjR1dWlaMkJKa0g4X2lCQzA0THhyaWd2MFluSFE?oc=5"
+            },
+            {
+              "source": "T news",
+              "title": "Why Retail Traders Couldn\u2019t Take Their Eyes Off These Stocks Last Week: AAPL, NVDA, ORCL, NOK, SPCX - Stocktwits",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMi7wFBVV95cUxOWkNoS2pBTkFWNU5pV25odndXSmJHUkdUX1lkbTNpQWU3dFlpWlFVTVU0am1yaHZJM0pNd3JkU2ZSUGRxMDBocm42ekhNNUJ3WnQtUV9aUk9iUmpfemJVellLYmV0VHFlMy01VDZMUXc0VTlMU0hLSlZNZWFNZD",
+              "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOWkNoS2pBTkFWNU5pV25odndXSmJHUkdUX1lkbTNpQWU3dFlpWlFVTVU0am1yaHZJM0pNd3JkU2ZSUGRxMDBocm42ekhNNUJ3WnQtUV9aUk9iUmpfemJVellLYmV0VHFlMy01VDZMUXc0VTlMU0hLSlZNZWFNZDRQRFlQbjBjYkhaZzBlZGp2UkJFdmI0ekpxMUxlRHBoNkFsZkpROThiY19vaXBHRjhoeDl3VzlPSDBvcDFESUNZQWpWbDN1QlJmVmRIUkMzVFZ1VXZ6TnVNVzV0RzBOanFhWENidWtjNTZKWUN5OXZ3RQ?oc=5"
+            },
+            {
+              "source": "T news",
+              "title": "At&t Stock Price Forecast. Should You Buy T? - StockInvest.us",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiREFVX3lxTE9zb25ONUZhVFhxSGYxbjRqTU10TXB3VUR4VXZHeGtyUnV0Z1dtblJoa1QycjZjT3B6SVhMY2xVQ1gzTzFa?oc=5\" target=\"_blank\">At&amp;t Stock Price Forecast. Should You Buy T?</a>&nb",
+              "link": "https://news.google.com/rss/articles/CBMiREFVX3lxTE9zb25ONUZhVFhxSGYxbjRqTU10TXB3VUR4VXZHeGtyUnV0Z1dtblJoa1QycjZjT3B6SVhMY2xVQ1gzTzFa?oc=5"
+            }
+          ],
+          "rationale": "The hold reflects that AT&T's original value-plus-momentum setup\u2014a very cheap trailing P/E alongside modest positive momentum\u2014remains unchanged, with no signal reversal or exit trigger hit. Headlines provided are largely unrelated to AT&T specifically, so the recent move looks technical/unclear rather than news-driven, aside from one generic 'undervalued' mention consistent with the value thesis. The system is maintaining the position on the same statistical cheapness/trend logic that justified the original entry."
+        },
+        {
+          "action": "hold",
+          "symbol": "DVN",
+          "name": "Devon Energy",
+          "sector": "Energy",
+          "price": 50.22999954223633,
+          "unrealized_pnl_pct": 0.0,
+          "entry_thesis": "Devon Energy was bought on solid momentum (+12.6%) and price above its moving average (+10.5%), alongside a deeply discounted trailing P/E (10.9, 56% below peers), pointing to a value name catching a positive technical trend. Headlines cite a bullish oil backdrop, an analyst seeing 37% upside, and a technical breakout setup, all consistent with the quantitative signals and suggesting the move is both technically and fundamentally supported. The system's entry thesis is that cheap valuation plus a confirmed breakout and favorable commodity environment provide a good risk/reward setup.",
+          "signals": {
+            "symbol": "DVN",
+            "name": "Devon Energy",
+            "sector": "Energy",
+            "price": 50.22999954223633,
+            "momentum_pct": 12.598069614418856,
+            "above_ma": true,
+            "ma_pct_diff": 10.514619170314235,
+            "volume_ratio": 0.957427719739386,
+            "volume_surge": false,
+            "weekly_volatility_pct": 4.611159582564624,
+            "trailing_pe": 10.919565,
+            "market_cap": 55253000192,
+            "pe_vs_median_pct": -55.74220183616383,
+            "score": 0.9046917053250076
+          },
+          "headlines": [
+            {
+              "source": "DVN news",
+              "title": "DVN Stock Falls Premarket, But This Analyst Sees 37% Upside Amid Bullish Oil Backdrop - Stocktwits",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMipwFBVV95cUxQczlIU2ZQX3EyNHdKVlY4UHQ2VlBSdE1VQjVUZGN5dF9PVkktTUpydEJMVF9Pa3R0UlNlbHhKeTJEWlIwM3ZTbjFoNzhORERWcFQyOGhUN0tUbVJrRklSalgtb3FLRzdKa290U2RsOHE5eWtOLTVWcU9LcVRLQy",
+              "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQczlIU2ZQX3EyNHdKVlY4UHQ2VlBSdE1VQjVUZGN5dF9PVkktTUpydEJMVF9Pa3R0UlNlbHhKeTJEWlIwM3ZTbjFoNzhORERWcFQyOGhUN0tUbVJrRklSalgtb3FLRzdKa290U2RsOHE5eWtOLTVWcU9LcVRLQy1qSG5pUnl0c19SZ1NsSGF1TlRLblVQM1F1VGlLNlllUXhoaHRzR0dFTQ?oc=5"
+            },
+            {
+              "source": "DVN news",
+              "title": "Devon Energy (DVN) Ascends While Market Falls: Some Facts to Note - Yahoo Finance",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMimwFBVV95cUxPbzJFTWRNaUxFenhXMmt3Uy0ya19lcHZOa2tGTl8tajJ0eTJNN05kY2FrVTQxVEZwS3hXX3pKQWFPc3VyYzRkN3k1aXBjWnlLWFJ0R1BSMTNSTzFsZGt5bTRRSndiVC1NOVpHZ0hpZUVBeEwydHZJN3E3bXA0Yj",
+              "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPbzJFTWRNaUxFenhXMmt3Uy0ya19lcHZOa2tGTl8tajJ0eTJNN05kY2FrVTQxVEZwS3hXX3pKQWFPc3VyYzRkN3k1aXBjWnlLWFJ0R1BSMTNSTzFsZGt5bTRRSndiVC1NOVpHZ0hpZUVBeEwydHZJN3E3bXA0YjJmNFhRUmR3OVlvRlExZmdacjVyajFfS3RkaWFZRQ?oc=5"
+            },
+            {
+              "source": "DVN news",
+              "title": "Devon Energy Corporation $DVN Position Lifted by The Manufacturers Life Insurance Company - MarketBeat",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMi4wFBVV95cUxQUlJJQUp4QkY1SGQ5OFpYZnRqUTlETzFCV0F4TlRHUkhrQ0U2UTNmMjdFN0lSam0yNVlJUTFTRWswUUtCVk12cFBLekZ2akxlWFg0V1dlSko3eW9rNThuZGZLcERSRzZISU9DeWhhTXEtNEprTUI4MU5adEdWOT",
+              "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQUlJJQUp4QkY1SGQ5OFpYZnRqUTlETzFCV0F4TlRHUkhrQ0U2UTNmMjdFN0lSam0yNVlJUTFTRWswUUtCVk12cFBLekZ2akxlWFg0V1dlSko3eW9rNThuZGZLcERSRzZISU9DeWhhTXEtNEprTUI4MU5adEdWOTREYW1XQ1Rpd1RoeG5vdUxFTWVlMTEta2p4ZnJ1UkFjNmFNbENXcmMzc1JpOGRqSURUNENCNThobmRncXF0aHRDbDFCRG9RaFpOempBQ21vS1pxZ25UMXVsTzF5UEZXRUZkMEN6QQ?oc=5"
+            },
+            {
+              "source": "DVN news",
+              "title": "Devon Energy (NYSE:DVN) Flashes a Strong Technical Breakout Setup - ChartMill",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiswFBVV95cUxOdEkzN2xJNnBOVEJiR3ZYeDBrdkVZOFJKUzZKbElLMnVRc1ZQRURzQ1hLUE5KRjNfRGNabE15VDBHaGtENnRSUEo4YXkzem9keU1TdmtzV2w2bzlfcldnX21BMlNjU0ZtMU5lMVRGaGN4djhFcS1yV0RSamZ0WH",
+              "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOdEkzN2xJNnBOVEJiR3ZYeDBrdkVZOFJKUzZKbElLMnVRc1ZQRURzQ1hLUE5KRjNfRGNabE15VDBHaGtENnRSUEo4YXkzem9keU1TdmtzV2w2bzlfcldnX21BMlNjU0ZtMU5lMVRGaGN4djhFcS1yV0RSamZ0WHRmelJ4UmlOaFMwREFnNjFrVkNuSGlBb0NmT0FZMWl4dVNQVVdQc2ZGSElDOFRLcXhiTk8tVQ?oc=5"
+            },
+            {
+              "source": "DVN news",
+              "title": "Why Devon Energy (DVN) Stock Is Up Today - Quiver Quantitative",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMigwFBVV95cUxNOEF1aWphQnlkLUhSbWV0eGRmVnJjOV9MVGFfVUVvV1JGTTNMa3VlQ2Z1NlJiMFhDSlh4OTB2c24tTnhSVzB3bjVTNFNFNkUzZUM0VERVTFNpQ0FwUlY4VHI1ME1sYlE2V0tfcW5tRVA5bTZZRWN1OVlnZ1BQNz",
+              "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNOEF1aWphQnlkLUhSbWV0eGRmVnJjOV9MVGFfVUVvV1JGTTNMa3VlQ2Z1NlJiMFhDSlh4OTB2c24tTnhSVzB3bjVTNFNFNkUzZUM0VERVTFNpQ0FwUlY4VHI1ME1sYlE2V0tfcW5tRVA5bTZZRWN1OVlnZ1BQNzVNMlBBMA?oc=5"
+            }
+          ],
+          "rationale": "DVN remains held as its combination of a deep valuation discount and confirmed technical breakout continues to support the original entry thesis, with no stop-loss or reversal condition triggered. Headlines reinforce this view, citing a bullish oil backdrop, an analyst's 37% upside call, and a noted technical breakout, aligning news flow with the quantitative signal. The system sees the fundamental and technical case as still intact and is holding the position unchanged."
+        },
+        {
+          "action": "hold",
+          "symbol": "CMCSA",
+          "name": "Comcast",
+          "sector": "Communication Services",
+          "price": 25.200000762939453,
+          "unrealized_pnl_pct": 0.0,
+          "entry_thesis": "CMCSA was bought primarily on its steep valuation discount (P/E of 8.1, 67% below the screened universe median), with modest positive momentum (+5.1%) and price just above its moving average, indicating this is more a value-driven entry than a momentum trade. Headlines show recent weakness\u2014shares fell after a Goldman conference flagged broadband pressure\u2014which is somewhat at odds with the stock's inclusion, suggesting the system is leaning on cheap valuation and a new network partnership story rather than recent price strength. The entry thesis rests on the stock being statistically cheap despite near-term sentiment headwinds.",
+          "signals": {
+            "symbol": "CMCSA",
+            "name": "Comcast",
+            "sector": "Communication Services",
+            "price": 25.200000762939453,
+            "momentum_pct": 5.131420462326362,
+            "above_ma": true,
+            "ma_pct_diff": 0.9761050955421893,
+            "volume_ratio": 0.7920954389728523,
+            "volume_surge": false,
+            "weekly_volatility_pct": 3.2574641968844227,
+            "trailing_pe": 8.076923,
+            "market_cap": 89425649664,
+            "pe_vs_median_pct": -67.26363843991531,
+            "score": 0.8876323968228401
+          },
+          "headlines": [
+            {
+              "source": "CMCSA news",
+              "title": "Why Comcast Stock Plummeted on Wednesday - Yahoo Finance",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxPaFJkTWtPcXd1bV81SkxaUTdyY3Y0bDR3Q3Z3a3laM3V0cXl3VXkyY0s2dy1qdEdUOEI0Z2dlN0xUbHNpbTBDNDZMZ3hBR05fQnhGS21rTXNKbDBVTEhaZDdZX2J4clo5TEtfeTVoRDdtSmZMUVNxd3h5d1VZVF",
+              "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPaFJkTWtPcXd1bV81SkxaUTdyY3Y0bDR3Q3Z3a3laM3V0cXl3VXkyY0s2dy1qdEdUOEI0Z2dlN0xUbHNpbTBDNDZMZ3hBR05fQnhGS21rTXNKbDBVTEhaZDdZX2J4clo5TEtfeTVoRDdtSmZMUVNxd3h5d1VZVFMteWdnX2I3NnhZU3JyVFJ5MzliZm5UM256REZPdktDaEtBQkZtbQ?oc=5"
+            },
+            {
+              "source": "CMCSA news",
+              "title": "Comcast tumbles after Goldman conference flags broadband pressure (CMCSA:NASDAQ) - Seeking Alpha",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxQajNWZHVVZmgwNV9TVVR2T3ZVRXV4c2pDTE1vNG5PeWQxSlJHZk1XMExNdWdJeEYzaEo5eFFUT3dleS1wdjdfQkdUZUJLRFJITW13Qmp0aWhPM2VHRWRpeWZITDhQa3ZQTmZXSkt4aDJlUWVuaDc4dTExRDFYOU",
+              "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQajNWZHVVZmgwNV9TVVR2T3ZVRXV4c2pDTE1vNG5PeWQxSlJHZk1XMExNdWdJeEYzaEo5eFFUT3dleS1wdjdfQkdUZUJLRFJITW13Qmp0aWhPM2VHRWRpeWZITDhQa3ZQTmZXSkt4aDJlUWVuaDc4dTExRDFYOUVXWWxCR3A3Q09OSDlqSU1rTF93QnZyV2lFSU5Sd3RiOUFZWGY3Y2J3?oc=5"
+            },
+            {
+              "source": "CMCSA news",
+              "title": "Comcast (CMCSA) Stock Still Looks Cheap On New Network Partnership News - simplywall.st",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMixAFBVV95cUxOLWNWUEdKR1RUVUJtSHI4dGRxV0hQSzhOdlJyREJnLWpDTGQwbTB1SFFINUM1THFieF9hbzJlTkEyYzVqQlhDeDdWUEdSS2xteFMxaURWY0NfRGFBX3BLWDZKWGI1Yll4SXhyWThhYzUxSFpBb3dOMGNTT25odE",
+              "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOLWNWUEdKR1RUVUJtSHI4dGRxV0hQSzhOdlJyREJnLWpDTGQwbTB1SFFINUM1THFieF9hbzJlTkEyYzVqQlhDeDdWUEdSS2xteFMxaURWY0NfRGFBX3BLWDZKWGI1Yll4SXhyWThhYzUxSFpBb3dOMGNTT25odEV4Mnd1TC1NaVB4X1hxZDhXNEZwNnF0MFBIQXQ1bC1FdUQyYmx6WnNSQXM2bURteklpeWRnQ2dxdmZVUUcyNUxpV0pWUkN30gHKAUFVX3lxTE45anNVTS1MTWtnQ3lRNXphdU5La2tNOFhWSkJ4RjRNay1KSGI0S0tVSDAzSEhjOHpqcDRCck1iZFhBNWItN21WTU9HWENCOEFHb1JXcl9ZVXJnSjhOTkRLSTUyLUdWS0RmQXFrazFfd1I1X24zanVScEdXLXl0NVpKSXA2ako1OFEwaFZLRGxNbmRrSHFYd2hGUzRmcVZNRjFqVnNfQU9obUE3ekJvVVBtZ2RtRkdrakx5eG14bEdMVVc0YWZObG4zTUE?oc=5"
+            },
+            {
+              "source": "CMCSA news",
+              "title": "Why Comcast (CMCSA) Stock Is Down Today - Quiver Quantitative",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiggFBVV95cUxNU0o0d2VsVGNtTUZkaTFLUXNmeWR6ODRvdlc4MkFRNUlBQTJLOGVNTjdCN3pWWGhNZDZmeHZyQjRKZjdSU1RpWXBQN3YwMlFWcXlXcDU2UnhBSFVtS0Z0dFJXekxORkpkQU1rSTZ1bFhGdjgwOWRrTkJKQlFDVW",
+              "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNU0o0d2VsVGNtTUZkaTFLUXNmeWR6ODRvdlc4MkFRNUlBQTJLOGVNTjdCN3pWWGhNZDZmeHZyQjRKZjdSU1RpWXBQN3YwMlFWcXlXcDU2UnhBSFVtS0Z0dFJXekxORkpkQU1rSTZ1bFhGdjgwOWRrTkJKQlFDVW5MNlBn?oc=5"
+            },
+            {
+              "source": "CMCSA news",
+              "title": "Should You Buy Comcast Stock Because Its Cash Outruns Its Earnings? - Trefis",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMixwFBVV95cUxNSTRfNTBseldINmFtX2M3ckVoWEFac2FsTkFTRlA0OTJpUnRLVEpXeVNaRUJnV2xfem9aX2pTSnN2VWFqcGFRVGJWeWVVNGF4T0d0dE16ZDBpSG5kcXJpbXB2ZXB4SUhSMkYwb2hrSEkwb2VxRXlnMEJxZnlOa2",
+              "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNSTRfNTBseldINmFtX2M3ckVoWEFac2FsTkFTRlA0OTJpUnRLVEpXeVNaRUJnV2xfem9aX2pTSnN2VWFqcGFRVGJWeWVVNGF4T0d0dE16ZDBpSG5kcXJpbXB2ZXB4SUhSMkYwb2hrSEkwb2VxRXlnMEJxZnlOa2tiRlQzVlBEZ3JBcFYyeUFtY25VZ3lNSHZkVGFiSFg2dGlLTlN4Z3hNWW10MFl3WlZQYWRpVkZUNXhZYUdHRWxOMERhT1A4N1gw?oc=5"
+            }
+          ],
+          "rationale": "CMCSA is held on its original deep-value thesis, anchored by a trailing P/E roughly 67% below the screened universe median, even though momentum is only modestly positive. Headlines show the stock has faced real pressure\u2014falling after a Goldman conference flagged broadband headwinds\u2014which is a legitimate negative catalyst, but a new network partnership story is cited as still supporting the cheap-valuation case. The system is maintaining the position, betting the statistical discount outweighs near-term sentiment weakness, with no exit rule triggered yet."
+        },
+        {
+          "action": "hold",
+          "symbol": "REGN",
+          "name": "Regeneron",
+          "sector": "Healthcare",
+          "price": 781.489990234375,
+          "unrealized_pnl_pct": 0.0,
+          "entry_thesis": "Regeneron was bought on strong momentum (+27.8%) combined with a discounted trailing P/E (19.3, 22% below the peer median), suggesting the model sees an attractively priced stock with recent positive price action. Headlines referencing a 'credible value stock' and coverage of the stock climbing after a recent update support the idea that the move has some fundamental backing, though the exact catalyst isn't fully specified in the headlines. The system's entry thesis combines the momentum signal with valuation support, treating this as a value-momentum opportunity.",
+          "signals": {
+            "symbol": "REGN",
+            "name": "Regeneron",
+            "sector": "Healthcare",
+            "price": 781.489990234375,
+            "momentum_pct": 27.803037743819225,
+            "above_ma": true,
+            "ma_pct_diff": 3.9966623424380128,
+            "volume_ratio": 0.6477492003337737,
+            "volume_surge": false,
+            "weekly_volatility_pct": 3.414733351553635,
+            "trailing_pe": 19.343811,
+            "market_cap": 80458293248,
+            "pe_vs_median_pct": -21.59811467238907,
+            "score": 0.8860209508001375
+          },
+          "headlines": [
+            {
+              "source": "REGN news",
+              "title": "Evaluating Bullish Potential in Regeneron Pharmaceuticals (REGN) Stock - Yahoo Finance",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuwFBVV95cUxPZ1lITzE1em0yd2liNUFPb3J5Tkx5ZHgwNmppYk5nQlE4Y2lmMGpWSlFpc054U1hfaWRGY3JyU2lmVzF6MW5BNVkyazVyUUlEU25Bek1VNDdQX1M4MWU2S1NKaEF5VnAzTWFSNUk5R3Y2VjRENHplNzQwMEdPSE",
+              "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPZ1lITzE1em0yd2liNUFPb3J5Tkx5ZHgwNmppYk5nQlE4Y2lmMGpWSlFpc054U1hfaWRGY3JyU2lmVzF6MW5BNVkyazVyUUlEU25Bek1VNDdQX1M4MWU2S1NKaEF5VnAzTWFSNUk5R3Y2VjRENHplNzQwMEdPSExqSmZrOEtwOVFmSkNCbFh2WEtBZXQ0d1J1cVVubnRmUHU2dEhqc1Z6R2RnckdHZlByLTNiYUd1MWh3cmV3?oc=5"
+            },
+            {
+              "source": "REGN news",
+              "title": "Regeneron Pharmaceuticals (NASDAQ:REGN): A Credible Value Stock With a Meaningful Discount - ChartMill",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMi1AFBVV95cUxNVVFadDJPc3BOYUhyRGlvVU9iSmdtRlI4bXN1RkJfLWZsbEEzZkM4aVVZdWdKLWlPVnNla0V0ZW9vVVh4dXhYem54SlBySm9ZU2M5Z1dvajVUbXc5aVM2aGVZa0JYQUxMWTM0TTA4ZFd0eUNZV043WGhSSi1NcV",
+              "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNVVFadDJPc3BOYUhyRGlvVU9iSmdtRlI4bXN1RkJfLWZsbEEzZkM4aVVZdWdKLWlPVnNla0V0ZW9vVVh4dXhYem54SlBySm9ZU2M5Z1dvajVUbXc5aVM2aGVZa0JYQUxMWTM0TTA4ZFd0eUNZV043WGhSSi1NcVZzSWVWdjljbG1nejhaOUp6amJOQmJBWlpFY1ZidDNDUmdRa3lvcURnMFRQdTRGeUU1LWtENE9Fb0hMM1BJYUdTMU5Vb3luMlpLVTBjLUl0dS1BX0FhNg?oc=5"
+            },
+            {
+              "source": "REGN news",
+              "title": "Nasdaq, S&P 500 Futures Retreat After Record Week: Why NVDA, NOW, POET, IBRX, UNH, REGN Are In Focus - Stocktwits",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxQckpYdk1taWRmU1ZLdGRTcE5IZ2R6dUpBMmVuRzJyanFZNUNMaGR2bHEyci1LbjN1WElRakdrYl9OWHpYUmt1U0cxNEZkUGdmYktEdkFEcWtkS0ZLQkdMUkZPbmNPaHVfbk9KUUlXVC1HN3M3MmZXU3NtZEtjVE",
+              "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQckpYdk1taWRmU1ZLdGRTcE5IZ2R6dUpBMmVuRzJyanFZNUNMaGR2bHEyci1LbjN1WElRakdrYl9OWHpYUmt1U0cxNEZkUGdmYktEdkFEcWtkS0ZLQkdMUkZPbmNPaHVfbk9KUUlXVC1HN3M3MmZXU3NtZEtjVENvZFdHRDNWdnFBcDA0WWdTOUlTcy01bzlnbTFBYjZRSVN4RDlfN3Rqa2xsSWdCWEs4SDc2SjFnX1N3OWFLZVhhQUF1RjhHbk9WVkJLVWpEQQ?oc=5"
+            },
+            {
+              "source": "REGN news",
+              "title": "Regeneron Pharmaceuticals Inc (REGN) Stock Price, Quote, News & History - Benzinga",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMiS0FVX3lxTE1vdkx2VjEtUnR3M1V5TXRCSksxSGFhb0pBemFPRHFKcGEtVTFxcGlTOXRFcU5WUFZyd2NwUHlSdVdPYlJhZ013emNDcw?oc=5\" target=\"_blank\">Regeneron Pharmaceuticals Inc (REGN) Stock Pr",
+              "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1vdkx2VjEtUnR3M1V5TXRCSksxSGFhb0pBemFPRHFKcGEtVTFxcGlTOXRFcU5WUFZyd2NwUHlSdVdPYlJhZ013emNDcw?oc=5"
+            },
+            {
+              "source": "REGN news",
+              "title": "Why Did Regeneron Pharmaceuticals (REGN) Climb After Its Latest Update? - simplywall.st",
+              "summary": "<a href=\"https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaVNVVFpMamMtNzhCUWJoNmhoR3FtbGVNUVlFWFdJdUlTUEtfUmh3OTdFd1lMSlhMLTMyV21henZQMWJmMTI3NTg0ZWJKalVCS1YyUXZFTHpVM2ZiNWl2M2RoMzlpX0ozZ0dQVmc2TG1XY3V2ei11N3JocVFKb2",
+              "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQaVNVVFpMamMtNzhCUWJoNmhoR3FtbGVNUVlFWFdJdUlTUEtfUmh3OTdFd1lMSlhMLTMyV21henZQMWJmMTI3NTg0ZWJKalVCS1YyUXZFTHpVM2ZiNWl2M2RoMzlpX0ozZ0dQVmc2TG1XY3V2ei11N3JocVFKb29vSl9xV0ZmQ3A4TFFHZW1wal8xSFRHRDdxaUlHUHFLeWtETnpXeGhRc29OelBzWU1iM1Rzcm0yd0VsMTVoMlJTcWVjbkJNYlMwZU55WjlUN2lCQWtJcmRISjFKT0hTVTdTTW96OEg1YnRJU1VHUDViZzDSAfYBQVVfeXFMTW5NZ3RLYzVIeXg0cVJ1a0JXR0dmZjN5RGRXMzdpblhyMWpWRHBxMWs0V2ZaOWxHTEVEU1pEN2xYSjVPVUh4Ul9BRnROYXhvNEFXd0dfMG5xVmdqeTN4bkx4OU1wVnI1dmpHMG1Gc1liRlh3M285YnBJeXkzTnJxN2J0TnhpREtFZ1d4YmhLOEJkYVFxZmFpOVh1LXNhYkw5bTVPT1NKQW1aVzZyQXFpNzJDekZlcUNGY09qRjFyY0MwaEZ0b2VBV3gxR3JoTWJxelhPdVpSX1Z1Ri1icV9Ua1drV2RJM3lsNnBNYkpWWkdFMHhGVTlB?oc=5"
+            }
+          ],
+          "rationale": "REGN continues to be held under its value-momentum thesis, combining strong momentum (+27.8%) with a P/E about 22% below peers, and no reversal or exit trigger has fired. Headlines describing it as a 'credible value stock' and noting the stock climbed after a recent update are consistent with the entry logic, though the specific news catalyst isn't clearly spelled out. The system judges the original combined valuation-and-momentum rationale still holds and keeps the position in place."
+        }
+      ]
     }
   ],
   "benchmark_history": {
     "SPY": [
+      {
+        "date": "2026-09-14",
+        "price": 764.2899780273438
+      },
       {
         "date": "2026-09-14",
         "price": 764.2899780273438
@@ -873,15 +1235,27 @@
       {
         "date": "2026-09-14",
         "price": 714.8800048828125
+      },
+      {
+        "date": "2026-09-14",
+        "price": 714.8800048828125
       }
     ],
     "QAI": [
       {
         "date": "2026-09-14",
         "price": 36.369998931884766
+      },
+      {
+        "date": "2026-09-14",
+        "price": 36.369998931884766
       }
     ],
     "GURU": [
+      {
+        "date": "2026-09-14",
+        "price": 69.05000305175781
+      },
       {
         "date": "2026-09-14",
         "price": 69.05000305175781
