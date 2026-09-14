@@ -191,8 +191,14 @@ def main():
 
     rationale_by_symbol = {e["symbol"]: e["rationale"] for e in events}
     for pos in ledger["positions"]:
-        if pos["symbol"] in rationale_by_symbol and not pos.get("entry_thesis"):
-            pos["entry_thesis"] = rationale_by_symbol[pos["symbol"]]
+        if pos["symbol"] in rationale_by_symbol:
+            if not pos.get("entry_thesis"):
+                pos["entry_thesis"] = rationale_by_symbol[pos["symbol"]]
+            # entry_thesis stays frozen as the original buy rationale; latest_thesis
+            # updates every run so "Open positions" reflects current thinking, not
+            # just the reasoning from the week it was bought.
+            pos["latest_thesis"] = rationale_by_symbol[pos["symbol"]]
+            pos["latest_thesis_date"] = today
     for trade in ledger["closed_trades"]:
         if trade["exit_date"] == today and not trade.get("exit_thesis"):
             trade["exit_thesis"] = rationale_by_symbol.get(trade["symbol"], "")

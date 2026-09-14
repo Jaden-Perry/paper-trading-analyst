@@ -72,6 +72,7 @@
   </section>
   <section>
     <h2>Open positions</h2>
+    <div class="sub" style="margin-bottom:10px;">Current thinking on each holding, updated every run. See Weekly reports below for the full week-by-week history.</div>
     <div id="open_positions"></div>
   </section>
   <section>
@@ -80,6 +81,7 @@
   </section>
   <section>
     <h2>Weekly reports</h2>
+    <div class="sub" style="margin-bottom:10px;">Every decision, every run - including weeks where a position was simply held, so you can see how the reasoning evolved over time.</div>
     <div id="weekly_reports"></div>
   </section>
 </main>
@@ -229,7 +231,10 @@ function renderOpenPositions(positions) {
         <div class="${pnlClass(p.unrealized_pnl_pct)}">${fmtPct(p.unrealized_pnl_pct)} (${fmtMoney(p.unrealized_pnl)})</div>
       </div>
       <div class="sub">Entered ${escapeHtml(p.entry_date)} @ ${fmtMoney(p.entry_price)} · now ${fmtMoney(p.current_price)} · stop ${fmtMoney(p.stop_loss)} · target ${fmtMoney(p.take_profit)} · max hold until ${escapeHtml(p.max_hold_until)}</div>
-      <div class="thesis">${escapeHtml(p.entry_thesis)}</div>
+      <div class="thesis">${escapeHtml(p.latest_thesis || p.entry_thesis)}</div>
+      ${p.latest_thesis && p.latest_thesis_date && p.latest_thesis_date !== p.entry_date
+        ? `<div class="sub" style="margin-top:6px;">As of ${escapeHtml(p.latest_thesis_date)} · originally entered on ${escapeHtml(p.entry_date)}: ${escapeHtml(p.entry_thesis)}</div>`
+        : ''}
     </div>
   `).join('');
 }
