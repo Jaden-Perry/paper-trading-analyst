@@ -54,7 +54,14 @@
     <div class="stat-grid" id="summary"></div>
   </section>
   <section>
-    <h2>Portfolio value</h2>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <h2 style="margin-bottom:0;">Portfolio value</h2>
+      <select id="valuePeriodSelect" style="background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:13px;">
+        <option value="all">All time</option>
+        <option value="1m">Last month</option>
+        <option value="1y">Last year</option>
+      </select>
+    </div>
     <div class="chart-wrap"><canvas id="valueChart" height="90"></canvas></div>
   </section>
   <section id="benchmark_section">
@@ -80,7 +87,7 @@
 <script>
 function fmtMoney(n) { return '$' + Number(n).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
 function fmtPct(n) { if (n === null || n === undefined) return '—'; return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%'; }
-function pnlClass(n) { return n >= 0 ? 'pos' : 'neg'; }
+function pnlClass(n) { if (n === null || n === undefined) return ''; return n >= 0 ? 'pos' : 'neg'; }
 function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function nameOf(obj) { return obj.name || (obj.entry_signals && obj.entry_signals.name) || (obj.signals && obj.signals.name) || ''; }
 function sectorOf(obj) { return obj.sector || (obj.entry_signals && obj.entry_signals.sector) || (obj.signals && obj.signals.sector) || ''; }
@@ -111,6 +118,8 @@ function renderSummary(s) {
   const stats = [
     ['Total value', fmtMoney(s.total_value), null],
     ['Total return', fmtPct(s.total_return_pct), pnlClass(s.total_return_pct)],
+    ['1M return', fmtPct(s.return_1m_pct), pnlClass(s.return_1m_pct)],
+    ['1Y return', fmtPct(s.return_1y_pct), pnlClass(s.return_1y_pct)],
     ['Cash', fmtMoney(s.cash), null],
     ['Open positions', s.num_open_positions, null],
     ['Closed trades', s.num_closed_trades, null],
@@ -126,11 +135,34 @@ function renderSummary(s) {
 }
 
 let chartInstance = null;
+let fullValueHistory = [];
+
+function filterByPeriod(history, period) {
+  if (period === 'all' || !history.length) return history;
+  const days = period === '1m' ? 30 : 365;
+  const cutoff = new Date(history[history.length - 1].date);
+  cutoff.setDate(cutoff.getDate() - days);
+  return history.filter(h => new Date(h.date) >= cutoff);
+}
+
 function renderChart(history) {
+  fullValueHistory = history;
+  const select = document.getElementById('valuePeriodSelect');
+  select.onchange = () => renderChartForPeriod(select.value);
+  renderChartForPeriod(select.value);
+}
+
+function renderChartForPeriod(period) {
+  const history = filterByPeriod(fullValueHistory, period);
   const ctx = document.getElementById('valueChart');
   const labels = history.map(h => h.date);
   const values = history.map(h => h.total_value);
   if (chartInstance) chartInstance.destroy();
+  if (!history.length) {
+    chartInstance = null;
+    ctx.getContext('2d').clearRect(0, 0, ctx.width, ctx.height);
+    return;
+  }
   chartInstance = new Chart(ctx, {
     type: 'line',
     data: { labels, datasets: [{ label: 'Portfolio value', data: values, borderColor: '#5b8cff', backgroundColor: 'rgba(91,140,255,0.1)', fill: true, tension: 0.2, pointRadius: 2 }] },

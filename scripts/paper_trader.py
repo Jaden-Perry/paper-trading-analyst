@@ -12,7 +12,7 @@ import argparse
 import json
 import statistics
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import benchmarks
@@ -63,6 +63,23 @@ def max_drawdown_pct(history: list[dict]) -> float:
         drawdown = (h["total_value"] - peak) / peak if peak else 0.0
         worst = min(worst, drawdown)
     return abs(worst)
+
+
+def trailing_return_pct(history: list[dict], days: int) -> float | None:
+    """% return from the most recent entry at/before (latest date - days) to
+    the latest entry. Returns None if there's no entry that old yet - e.g. a
+    1-year return with only 3 weeks of history - rather than a misleading
+    number computed from less history than the label implies.
+    """
+    if not history:
+        return None
+    latest = history[-1]
+    cutoff = date.fromisoformat(latest["date"]) - timedelta(days=days)
+    eligible = [h for h in history if date.fromisoformat(h["date"]) <= cutoff]
+    if not eligible:
+        return None
+    base = eligible[-1]["total_value"]
+    return (latest["total_value"] - base) / base if base else None
 
 
 def normalized_return_history(entries: list[dict], value_key: str) -> list[dict]:
@@ -124,6 +141,8 @@ def build_dashboard(ledger: dict, all_prices: dict[str, float], benchmark_config
             "num_closed_trades": len(ledger["closed_trades"]),
             "win_rate": win_rate,
             "max_drawdown_pct": max_drawdown_pct(ledger["history"]),
+            "return_1m_pct": trailing_return_pct(ledger["history"], 30),
+            "return_1y_pct": trailing_return_pct(ledger["history"], 365),
         },
         "open_positions": open_positions,
         "closed_trades": closed_trades,
